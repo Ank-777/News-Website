@@ -14,14 +14,15 @@ const newsdetails = document.getElementById("newsdetails");
 var newsDataArr = [];
 
 // apis 
-const API_KEY = "d5de906c35b84ec7adb1e49229f99066";
-const HEADLINES_NEWS = "https://newsapi.org/v2/top-headlines?country=in&apiKey=";
-const GENERAL_NEWS = "https://newsapi.org/v2/top-headlines?country=in&category=general&apiKey=";
-const BUSINESS_NEWS = "https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=";
-const SPORTS_NEWS = "https://newsapi.org/v2/top-headlines?country=in&category=sports&apiKey=";
-const ENTERTAINMENT_NEWS = "https://newsapi.org/v2/top-headlines?country=in&category=entertainment&apiKey=";
-const TECHNOLOGY_NEWS = "https://newsapi.org/v2/top-headlines?country=in&category=technology&pageSize=8&apiKey=";
-const SEARCH_NEWS = "https://newsapi.org/v2/everything?q=";
+const API_KEY = "caea6891a922a8011f7fb33c3a57fdb9";
+const HEADLINES_NEWS = "https://gnews.io/api/v4/top-headlines?country=in&token=API-Key";
+const GENERAL_NEWS = "https://gnews.io/api/v4/top-headlines?country=in&category=general&API-Key";
+const BUSINESS_NEWS = "https://gnews.io/api/v4/top-headlines?country=in&category=business&API-Key";
+const SPORTS_NEWS = "https://gnews.io/api/v4/top-headlines?country=in&category=sports&API-Key";
+const ENTERTAINMENT_NEWS = "https://gnews.io/api/v4/top-headlines?country=in&category=entertainment&API-Key";
+const TECHNOLOGY_NEWS = "https://gnews.io/api/v4/top-headlines?country=in&category=technology&pageSize=8&API-Key";
+const SEARCH_NEWS = "https://gnews.io/api/v4/everything?q=";
+
 
 window.onload = function() {
     newsType.innerHTML="<h4>Headlines</h4>";
@@ -163,7 +164,8 @@ const fetchQueryNews = async () => {
     if(newsQuery.value == null)
         return;
 
-    const response = await fetch(SEARCH_NEWS+encodeURIComponent(newsQuery.value)+"&apiKey="+API_KEY);
+    // const response = await fetch(SEARCH_NEWS+encodeURIComponent(newsQuery.value)+"&apiKey="+API_KEY);
+     const response = await fetch(SEARCH_NEWS+encodeURIComponent(newsQuery.value)+"&API-Key"+API_KEY);
     newsDataArr = [];
     if(response.status >= 200 && response.status < 300) {
         const myJson = await response.json();
@@ -173,10 +175,7 @@ const fetchQueryNews = async () => {
         console.log(response.status, response.statusText);
         newsdetails.innerHTML = "<h5>No data found.</h5>"
         return;
-    }// const fetchStockPrediction = async () => {
-//     const response = await fetch(StockPrediction);
-//         displayNews();
-// }
+    }
 
 
     displayNews();
